@@ -1,0 +1,32 @@
+{
+	"name": "mongo-express-node-typecript",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.2",
+		"@types/node": "^13.1.7",
+		"nodemon": "^2.0.2",
+		"ts-node": "^8.6.2",
+		"typescript": "^3.7.4"
+	},
+	"scripts": {
+		"start": "node dist/app.js",
+		"dev": "nodemon src/app.ts",
+		"build": "tsc -p ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alamariful1727/mongo-express-node-typecript.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/alamariful1727/mongo-express-node-typecript/issues"
+	},
+	"homepage": "https://github.com/alamariful1727/mongo-express-node-typecript#readme"
+}
