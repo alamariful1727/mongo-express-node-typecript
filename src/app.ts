@@ -1,10 +1,31 @@
-import express from 'express';
+import App from './config/express';
+import mongoose = require('mongoose');
+import config = require('./config/index');
 
-const app = express();
-const port = 5000;
+// make bluebird default Promise
+Promise = require('bluebird');
 
-app.get('/', (req, res, next) => {
-	res.send('Hello');
+// plugin bluebird promise in mongoose
+mongoose.Promise = Promise;
+
+// connect to mongo db
+const mongoUri = config.MONGO_HOST;
+mongoose.connect(mongoUri, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useFindAndModify: false,
+	useUnifiedTopology: true
+});
+mongoose.connection.on('open', () => {
+	console.info(`Successfully connect to database: ${mongoUri}`);
+});
+mongoose.connection.on('error', (err: any) => {
+	console.error(err);
 });
 
-app.listen(port, () => console.log(`Server running on ${port}`));
+// start server
+App.listen(config.PORT, () => {
+	console.info(`server started on port ${config.PORT} (${config.NODE_ENV})`);
+});
+
+module.exports = App;
