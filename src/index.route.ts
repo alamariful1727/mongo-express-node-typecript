@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-// const User = require('./server/user/user.route');
+const bookRoutes = require('./Book/book.route');
 
 class Routes {
-	public _express: express.Application;
+	public _express: Application;
 
 	constructor() {
 		this._express = express();
@@ -19,7 +19,7 @@ class Routes {
 
 	private routes(): void {
 		// user route
-		// this.express.use('/user', User);
+		this._express.get('/book', bookRoutes);
 	}
 }
 

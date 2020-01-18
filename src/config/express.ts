@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import logger = require('morgan');
 import Routes from '../index.route';
@@ -8,7 +8,7 @@ import cors = require('cors');
 import { MongoDB } from './db';
 
 class App {
-	public _express: express.Application;
+	public _express: Application;
 	public _mongo: MongoDB;
 
 	constructor() {
@@ -32,17 +32,23 @@ class App {
 	}
 
 	private routes(): void {
-		this._express.get('/', (req, res, next) => {
-			res.send('Typescript App works!!');
-		});
+		this._express.get(
+			'/',
+			(req: Request, res: Response, next: NextFunction) => {
+				res.send('Typescript App works!!');
+			}
+		);
 
 		// user route
 		this._express.use('/api/v1', Routes);
 
 		// handle undefined routes
-		this._express.use('*', (req, res, next) => {
-			res.send('Make sure url is correct!!!');
-		});
+		this._express.use(
+			'*',
+			(req: Request, res: Response, next: NextFunction) => {
+				res.send('Make sure url is correct!!!');
+			}
+		);
 	}
 }
 

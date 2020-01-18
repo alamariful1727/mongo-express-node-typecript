@@ -1,5 +1,5 @@
 import mongoose = require('mongoose');
-import config = require('./../env/index');
+import config = require('../env');
 
 // make bluebird default Promise
 Promise = require('bluebird');
@@ -34,12 +34,15 @@ export class MongoDB {
 
 	private connect(): void {
 		const mongoUri = config.MONGO_HOST;
-		this._mongoose.connect(mongoUri, this._connectOptions);
-		this._mongoose.connection.on('open', () => {
-			console.info(`Successfully connect to database: ${mongoUri}`);
-		});
-		this._mongoose.connection.on('error', (err: any) => {
-			console.error(err);
-		});
+
+		this._mongoose
+			.connect(mongoUri, this._connectOptions)
+			.then(() => {
+				return console.log(`Successfully connected to ${mongoUri}`);
+			})
+			.catch((error: any) => {
+				console.log('Error connecting to database: ', error);
+				return process.exit(1);
+			});
 	}
 }

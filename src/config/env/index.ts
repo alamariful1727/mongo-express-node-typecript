@@ -36,9 +36,9 @@ const _validationOptions = {
 const { error, value } = envSchema.validate(process.env, _validationOptions);
 
 interface IConfig {
-	NODE_ENV: any;
-	PORT: any;
-	MONGO_HOST: any;
+	NODE_ENV: string;
+	PORT: number;
+	MONGO_HOST: string;
 }
 
 let config: IConfig = {
@@ -47,8 +47,9 @@ let config: IConfig = {
 	MONGO_HOST: ''
 };
 
-if (error as any) {
+if ((error as any) || !value.NODE_ENV || !value.PORT || !value.MONGO_HOST) {
 	console.error({
+		message: 'Please put fill up your .env',
 		name: error.name,
 		details: error.details
 	});
@@ -56,7 +57,7 @@ if (error as any) {
 } else {
 	config = {
 		NODE_ENV: value.NODE_ENV,
-		PORT: value.PORT,
+		PORT: parseInt(value.PORT),
 		MONGO_HOST: value.MONGO_HOST
 	};
 }
