@@ -25,8 +25,8 @@
 		"typescript": "^3.7.4"
 	},
 	"scripts": {
-		"start": "node dist/app.js",
-		"dev": "nodemon src/app.ts",
+		"start": "node dist/index.js",
+		"dev": "nodemon src/index.ts",
 		"build": "tsc -p ."
 	},
 	"repository": {

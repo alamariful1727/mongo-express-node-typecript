@@ -3,18 +3,18 @@ import bodyParser from 'body-parser';
 // const User = require('./server/user/user.route');
 
 class Routes {
-	public express: express.Application;
+	public _express: express.Application;
 
 	constructor() {
-		this.express = express();
+		this._express = express();
 		this.middleware();
 		this.routes();
 	}
 
 	// Configure Express middleware.
 	private middleware(): void {
-		this.express.use(bodyParser.json());
-		this.express.use(bodyParser.urlencoded({ extended: false }));
+		this._express.use(bodyParser.json());
+		this._express.use(bodyParser.urlencoded({ extended: false }));
 	}
 
 	private routes(): void {
@@ -23,4 +23,4 @@ class Routes {
 	}
 }
 
-export default new Routes().express;
+export default new Routes()._express;

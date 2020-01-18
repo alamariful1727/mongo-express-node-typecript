@@ -6,13 +6,13 @@ dotenv.config();
 let path: string;
 switch (process.env.NODE_ENV) {
 	case 'production':
-		path = `${__dirname}/../../.env.production`;
+		path = `${__dirname}/../../../.env.production`;
 		break;
 	case 'development':
-		path = `${__dirname}/../../.env.development`;
+		path = `${__dirname}/../../../.env.development`;
 		break;
 	default:
-		path = `${__dirname}/../../.env`;
+		path = `${__dirname}/../../../.env`;
 }
 
 dotenv.config({ path: path });
